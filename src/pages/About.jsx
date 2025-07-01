@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import '../styles/about.css'
 import { Container, Row, Col } from 'reactstrap'
 import img01 from '../assets/images/about-1.jpg'
-import CountUp from 'react-countup'
+
 
 
 
