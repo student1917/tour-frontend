@@ -1,0 +1,61 @@
+.intro {
+    margin-top: 2.5rem;
+}
+
+
+
+.sub__card p {
+    color: var(--text-color); 
+    margin-top: 1rem;
+    max-width: 600px;
+    text-align: justify;
+    margin-bottom: 0;
+}
+
+.img__container img {
+    height: 350px;
+    width: 100%;
+    border-radius: 20px;
+    object-fit: cover;
+   
+}
+
+.slogan p {
+    color: var(--text-color);
+    max-width: 1000px;
+    margin: 0 auto;
+    font-size: 1.3rem;
+    text-align: center;
+}
+
+.slogan h2{
+    margin-top: 7rem;  
+    margin-bottom: 7rem;
+    text-align: center;
+}
+
+.counter__box {
+    color: var(--text-color);
+    font-size: 2.5rem;
+    font-weight: 500;
+    margin-bottom: 3rem;
+}
+
+.counter__box h6 {
+    font-weight: 400;
+    font-size: 1.3rem;
+}
+
+
+
+@media only screen and (max-width:768px) {
+    .p__intro{
+        font-size: 1rem;
+    }
+
+    .counter__box h6 {
+        font-weight: 400;
+        font-size: 1rem;
+    }
+}
+
