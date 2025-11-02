@@ -76,6 +76,12 @@
     font-weight: 500;
 }
 
+.login__with-google {
+    border:none;
+    background-color: var(--text-color);
+    border-radius: 5px;
+}
+
 @media only screen and (max-width:768px) {
     .login__img{
         display: none;

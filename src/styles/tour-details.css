@@ -50,12 +50,16 @@
     font-size: 1.1rem;
     display: flex;
     align-items: center;
-    color: var(--secondary-color);
+    color: var(--text-color);
     cursor: pointer;
 }
 
+.rating__group span.active{
+    color: var(--secondary-color);
+}
+
 .tour__review h4 {
-    margin-bottom: 3rem;
+    margin-bottom: 3rem;    
 }
 
 .review__input {
@@ -101,7 +105,7 @@
 .review__item h5 {
     font-size: 1rem;
     margin-bottom: 0;
-    margin-top: 1rem;
+    margin-top: 1rem;    
 }
 
 .review__item p {
@@ -119,10 +123,24 @@
     color: var(--secondary-color)
 }
 
+
+
 .review__item span{
     font-weight: 500;
+    color: var(--text-color);
 }
 
+.activity__title {
+    margin-left: 0.3rem;
+}
+
+.activity__title i {
+    font-size: 0.7rem !important;
+}
+
+.activity__description {
+    margin-left: 1.5rem;
+}
 
 @media only screen and (max-width:576px) {
     .tour__extra-details {

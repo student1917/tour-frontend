@@ -1,10 +1,9 @@
-import React, {useState, useContext} from 'react'
+import React, {useState, useContext, useEffect} from 'react'
 
 import {Container, Row, Col, Form, FormGroup, Button} from 'reactstrap'
 import {Link, useNavigate} from 'react-router-dom'
-
+import GoogleLoginButton from '../components/GoogleLoginButton'
 import '../styles/login.css'
-
 import loginImg from '../assets/images/login.png'
 import userIcon from '../assets/images/user.png'
 import {AuthContext} from './../context/AuthContext'
@@ -50,6 +49,7 @@ const Login = () => {
         }
     }
 
+
   return (
     <section>
         <Container>
@@ -73,11 +73,25 @@ const Login = () => {
                                 </FormGroup>
                                 <FormGroup>
                                     <input type="password" placeholder='Password' required 
-                                    id='password' onChange={handleChange}/>
+                                    id='password' onChange={handleChange} autoComplete="new-password" />
                                 </FormGroup>
                                 <Button className='btn secondary__btn auth__btn' type='Submit'>Login</Button>                                
                             </Form>
+                            <div className="d-flex align-items-center gap-3 w-100 my-3">
+                                <hr className="flex-grow-1 border-top border-secondary" />
+                                <span className="small text-white">or Continue with</span>
+                                <hr className="flex-grow-1 border-top border-secondary" />
+                            </div>
+                            {/* <div id="google-login-btn" className='w-100'></div> */}
+                            <GoogleLoginButton
+                                clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
+                                dispatch={dispatch}
+                                navigate={navigate}
+                                buttonId="google-login-btn"
+                                textType="signin_with"
+                                />
                             <p>Don't have an account? <Link to='/register'>Create</Link></p>
+
                         </div>
                     </div>
                 </Col>
