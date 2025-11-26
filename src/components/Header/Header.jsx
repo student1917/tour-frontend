@@ -1,4 +1,3 @@
-/* eslint-disable eqeqeq */
 import React, {useRef, useEffect, useContext} from 'react'
 import {Container, Row, Button} from 'reactstrap'
 import {NavLink, Link, useNavigate, useLocation} from 'react-router-dom'
@@ -54,20 +53,23 @@ const Header = () => {
       if (!header) return;
   
       if (isHome) {
-        
+        // Nếu đang ở trang home
         if (scrollTop < 80) {
-          header.classList.add('transparent');      
-          header.classList.remove('sticky__header');  
+          header.classList.add('transparent');       // Trên cùng → trong suốt
+          header.classList.remove('sticky__header'); // Không cần sticky
+        } else {
+          header.classList.remove('transparent');    // Kéo xuống → có nền
+          header.classList.add('sticky__header');    // Cho hiệu ứng nền cố định
         }
       } else {
-       
+        // Trang khác → luôn có nền
         header.classList.remove('transparent');
         header.classList.add('sticky__header');
       }
     };
   
     window.addEventListener('scroll', handleScroll);
-    handleScroll(); 
+    handleScroll(); // chạy lần đầu
   
     return () => window.removeEventListener('scroll', handleScroll);
   }, [isHome]);
@@ -81,9 +83,7 @@ const Header = () => {
         justify-content-between'>
           {/* =======logo=======*/}
           <div className="logo">
-              <Link to="/home">
-                <img src={logo} alt="logo" />
-              </Link>
+            <img src={logo} alt="" />
           </div>
           {/* =======logo-end=======*/}
           {/* =======menu start=======*/}
@@ -118,7 +118,7 @@ const Header = () => {
 
               {
                 user? <>
-                <h5 className="mb-0" style={{ cursor: 'pointer' }} onClick={() => navigate(`/profile/${user._id}`)}>Hi, {user.username}</h5>
+                <h5 className="mb-0">Hi, {user.username}</h5>
                 <Button className="btn btn-dark" onClick={logout}>Logout</Button>
           
                 </> : <>
@@ -130,7 +130,7 @@ const Header = () => {
               
             </div>
             <span className="mobile__menu" onClick={toggleMenu}>
-              <i className="ri-menu-line"></i>
+              <i class="ri-menu-line"></i>
             </span>
 
 

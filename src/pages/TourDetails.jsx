@@ -6,7 +6,6 @@ import calculateAvgRating from '../utils/avgRating'
 import avatar from '../assets/images/avatar.jpg'
 import Booking from '../components/Booking/Booking'
 import Newsletter from '../shared/Newsletter'
-import ImageSlider from '../shared/ImageSlider'
 import useFetch from '../hooks/useFetch'
 import { BASE_URL } from '../utils/config'
 import {AuthContext} from './../context/AuthContext'
@@ -16,12 +15,12 @@ const TourDetails = () => {
     
     const {id} = useParams()
     const reviewMsgRef = useRef('')
-    const [tourRating, setTourRating]=useState(null)   
+    const [tourRating, setTourRating]=useState(null)
     const {user} = useContext(AuthContext)
     //fetch data 
     const {data:tour, loading, error} = useFetch(`${BASE_URL}/tours/${id}`)
 
-    const {photos, title, desc, price, country, reviews, city, maxGroupSize, itinerary} = tour
+    const {photo, title, desc, price, address, reviews, city, distance, maxGroupSize} = tour
 
     const {totalRating, avgRating} = calculateAvgRating(reviews)
 
@@ -77,18 +76,15 @@ const TourDetails = () => {
                     !loading && !error && <Row>
                     <Col lg='8'>
                         <div className="tour__content">
-                            
-                        {tour?.photos?.length > 0 && <ImageSlider photos={tour.photos} />}
-
-
+                            <img src={photo} alt="" />
                             <div className="tour__info">
                                 <h2>{title}</h2>
                                 <div className="d-flex align-items-center gap-5">
                                 <span className="tour__location d-flex align-items-center gap-1">
-                                    <i className="ri-map-pin-line"></i> {city}
+                                    <i class="ri-map-pin-line"></i> {city}
                                 </span>
                                 <span className="tour__rating d-flex align-items-center gap-1">
-                                    <i className="ri-star-fill" style={{ color: "var(--secondary-color)"}}></i> {avgRating == 0 ? null : avgRating} 
+                                    <i class="ri-star-fill" style={{ color: "var(--secondary-color)"}}></i> {avgRating == 0 ? null : avgRating} 
                                     {totalRating == 0 ? (
                                         'Not rated'
                                     ) : (
@@ -97,29 +93,13 @@ const TourDetails = () => {
                                 </span>                              
                                 </div>
                                 <div className="tour__extra-details">
-                                    <span><i className="ri-map-pin-user-fill"></i>{country?.name}</span>
-                                    <span><i className="ri-money-dollar-circle-line"></i>{price}/per person</span>
-                                    {/* <span><i className="ri-map-pin-time-line"></i>{distance} km</span> */}
-                                    <span><i className="ri-group-line"></i>{maxGroupSize} people</span>
+                                    <span><i class="ri-map-pin-user-fill"></i>{address}</span>
+                                    <span><i class="ri-money-dollar-circle-line"></i>{price}/per person</span>
+                                    <span><i class="ri-map-pin-time-line"></i>{distance} km</span>
+                                    <span><i class="ri-group-line"></i>{maxGroupSize} people</span>
                                 </div>
                                 <h5>Description</h5>
                                 <p>{desc}</p>
-                                <h5>Schedule</h5>
-                                {itinerary?.map((day, index) => (
-                                    <div key={day._id || index} className="itinerary__item mb-4">
-                                        <h6>Day {day.day}: {day.title}</h6>
-                                        <p>{day.activities?.map((activity, idx) => (                                            
-                                            <div key={activity._id || idx}>   
-                                            <span className='activity__title'><i className="ri-checkbox-blank-circle-fill"></i>{activity.title}</span>                                    
-                                                <span className='activity__description'>{activity.description ? ` ${activity.description}` : ''}</span>
-                                            </div>
-                                        ))}
-                                        </p>
-                                    </div>
-
-                                        ))
-
-                                }
                             </div>
                             
                             {/* ============review start======== */}
@@ -128,17 +108,11 @@ const TourDetails = () => {
                                 <Form onSubmit={submitHandler}>
                                     <div className="d-flex align-items-center gap-3 mb-4
                                     rating__group">
-                                        {/* <span onClick={()=>setTourRating(1)}><i className="ri-star-fill"></i></span>
-                                        <span onClick={()=>setTourRating(2)}><i className="ri-star-fill"></i></span>
-                                        <span onClick={()=>setTourRating(3)}><i className="ri-star-fill"></i></span>
-                                        <span onClick={()=>setTourRating(4)}><i className="ri-star-fill"></i></span>
-                                        <span onClick={()=>setTourRating(5)}><i className="ri-star-fill"></i></span> */}
-                                        {[1,2,3,4,5].map((num) => (
-                                            <span key={num} onClick={()=> setTourRating(num)} 
-                                                className={tourRating >= num ? 'active':''}>
-                                                <i className="ri-star-fill"></i>
-                                            </span>
-                                        ))}
+                                        <span onClick={()=>setTourRating(1)}><i class="ri-star-fill"></i></span>
+                                        <span onClick={()=>setTourRating(2)}><i class="ri-star-fill"></i></span>
+                                        <span onClick={()=>setTourRating(3)}><i class="ri-star-fill"></i></span>
+                                        <span onClick={()=>setTourRating(4)}><i class="ri-star-fill"></i></span>
+                                        <span onClick={()=>setTourRating(5)}><i class="ri-star-fill"></i></span>
                                         </div>
 
                                         <div className="review__input">
@@ -155,10 +129,10 @@ const TourDetails = () => {
 
                                 </Form>
 
-                                <ListGroup className='user__reviews'>
+                                <ListGroup className='user_reviews'>
                                     {
                                         reviews?.map(review=> (
-                                            <div key={review._id} className="review__item">
+                                            <div className="review__item">
                                                 <img src={avatar} alt="" />
 
                                                 <div className="w-100">
@@ -169,7 +143,7 @@ const TourDetails = () => {
                                                             <p>{new Date(review.createdAt).toLocaleDateString("en-US", options)}</p>
                                                         </div>
                                                         <span className='d-flex align-items-center'>
-                                                            {review.rating}<i className="ri-star-fill"></i>
+                                                            {review.rating}<i class="ri-star-fill"></i>
                                                         </span>
                                                     </div>
                                                     <h6>{review.reviewText}</h6>

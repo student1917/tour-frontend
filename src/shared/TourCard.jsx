@@ -7,28 +7,26 @@ import calculateAvgRating from '../utils/avgRating'
 
 const TourCard = ({tour}) => {
 
-    const{_id, title, city, photos, price, featured, reviews} =tour
+    const{_id, title, city, photo, price, featured, reviews} =tour
     const {totalRating, avgRating} = calculateAvgRating(reviews)
-    
-    const thumbnail = tour.photos.find(p=>p.isThumbnail) || tour.photos[0]
 
 
   return (
     <div className="tour__card">
         <Card>
             <div className="tour__img">
-                <img src={thumbnail?.url} alt="tour-img" />
+                <img src={photo} alt="tour-img" />
                 {featured && <span>Featured</span>}
             </div>
 
-                <CardBody>
+                    <CardBody>
             <div className="card__top d-flex align-items-center
             justify-content-between">
                 <span className="tour__location d-flex align-items-center gap-1">
-                <i className="ri-map-pin-line"></i> {city}
+                <i class="ri-map-pin-line"></i> {city}
                 </span>
                 <span className="tour__rating d-flex align-items-center gap-1">
-                    <i className="ri-star-fill"></i> {avgRating == 0 ? null : avgRating} 
+                    <i class="ri-star-fill"></i> {avgRating == 0 ? null : avgRating} 
                     {totalRating == 0 ? (
                         'Not rated'
                     ) : (

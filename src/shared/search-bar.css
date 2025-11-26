@@ -14,7 +14,7 @@
 .form__group input{
     border: none;
     font-size: 0.9rem;
-    color: gray;
+    color: black;;
     font-weight: 400;
 }
 
@@ -39,22 +39,6 @@
     border-radius: 10px 5px 10px 5px;
     cursor: pointer;
 }
-
-.dropdown-select {
-    justify-content: bet;
-    width: 100%;
-    border: none;
-    font-size: 0.9rem;
-    color: black;
-    font-weight: 400;
-    -webkit-appearance: none; 
-    -moz-appearance: none;   
-    appearance: none;        
-    background-image: none;
-    outline: none;
-    color: gray;
-}
-
 
 @media only screen and (max-width:992px) {
     .search__bar{
